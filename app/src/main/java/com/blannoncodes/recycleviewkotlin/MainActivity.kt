@@ -2,10 +2,47 @@ package com.blannoncodes.recycleviewkotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var dataList:ArrayList<Dataclass>
+    lateinit var imageList: Array<Int>
+    lateinit var titleList: Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        imageList = arrayOf(
+            R.drawable.list,
+            R.drawable.check_box,
+            R.drawable.image,
+            R.drawable.toggle,
+            R.drawable.star_rate
+            )
+
+        titleList = arrayOf(
+            "ListView",
+            "CheckBox",
+            "ImageView",
+            "Toggle Switch",
+            "Rating Star"
+        )
+
+        recyclerView = findViewById(R.id.recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+
+        dataList = arrayListOf<Dataclass>()
+        getData()
+    }
+
+    private fun getData(){
+        for (i in imageList.indices){
+            val dataClass = Dataclass(imageList[i], titleList[i])
+            dataList.add(dataClass)
+        }
     }
 }
